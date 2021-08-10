@@ -1,0 +1,12 @@
+extends layout.pug
+
+block content
+  section#content
+    if username 
+        h1 welcome #{username}
+    else
+        form(action='/hello' method='post')
+            label Please enter your name    
+                input(type='text', name='username')
+            button(type='submit') submit
+    

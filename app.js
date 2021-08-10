@@ -1,13 +1,28 @@
 const express = require('express');
+const bodyParser = require('body-parser')
 
 const app = express();
 
+app.use(bodyParser.urlencoded({extended: false}))
+
+app.set('view engine', 'pug')
+
 app.get('/', (req, res) => {
-    res.send('<h1>home</h1>')
+    res.render('index')
 });
-app.get('/hello', (req, res) => {
-    res.send('<h1>hello js page</h1>')
+
+app.get('/card', (req, res) => { 
+    res.render('card', {prompt:"who is burried in grants tomb" })
 });
+
+app.get('/hello', (req, res) => { 
+    res.render('hello')
+});
+
+app.post('/hello', (req, res) => {
+    res.render('hello', {username: req.body.username})
+    console.dir(req.body)
+})
 
 
 app.listen(3000, () => {
